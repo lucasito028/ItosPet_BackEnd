@@ -29,12 +29,4 @@ abstract class DatabaseConnect{
         }
     }
     
-    
-    abstract function create();
-
-    abstract function read();
-
-    abstract function alter();
-    
-    abstract function delete();
 }

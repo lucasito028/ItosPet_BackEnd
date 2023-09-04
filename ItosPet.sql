@@ -51,6 +51,21 @@ foreign key(RACA_ID) references RACA(IDRACA)
 
 
 
+create table MEIO_VENDA(
+    IDMEIO_VENDA int not null auto_increment,
+    NOMEMEIO_VENDA varchar(45) not null,
+    primary key(IDMEIO_VENDA)
+);
+
+
+create table MEIO_PAGAMENTO(
+    IDMEIO_PAGAMENTO int not null auto_increment,
+    NOMEMEIO_PAGAMENTO varchar(45) not null,
+    PARCELAMEIO_PAGAMENTO int not null,
+    primary key(IDMEIO_PAGAMENTO)
+);
+
+
 
 create table TIPOPRODUTO(
     IDTIPOPROD int NOT NULL auto_increment,
@@ -146,4 +161,19 @@ insert into RACA (NOMERACA, TIPO_ID) values ('Abyssinian', 2);
 insert into RACA (NOMERACA, TIPO_ID) values ('Aegean', 2);
 insert into RACA (NOMERACA, TIPO_ID) values ('Arabian Mau', 2);
 
+
+insert into MEIO_VENDA (NOMEMEIO_VENDA) values 
+('Presencial'),
+('Ecommerce');
+
+insert into MEIO_PAGAMENTO (NOMEMEIO_PAGAMENTO, PARCELAMEIO_PAGAMENTO) values
+('Dinheiro', 1),
+('PIX', 1),
+('Débito', 1),
+('Crédito à Vista', 1),
+('Parcelado 2X', 2),
+('Parcelado 3X', 3),
+('Parcelado 4X', 4),
+('Parcelado 5X', 5),
+('Parcelado 6X', 6)
 
