@@ -1,6 +1,6 @@
 <?php
 
-include('../Connect/DatabaseConnect.php');
+include("DatabaseConnect.php");
 
 abstract Class Cliente extends DatabaseConnect{
     
