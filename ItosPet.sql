@@ -109,9 +109,12 @@ create table ITEMVENDA(
     foreign key(FK_IDVENDA) references VENDA(IDVENDA)
 );
 
+
+
 insert into TIPOCLIENTE(NOMETIPOCLIENTE) VALUES ('Normal'),
 ('VIP'),
 ('Banana');
+
 
 insert into CLIENTE(FKIDTIPOCLIENTE, NOMECLIENTE, SOBRENOME) 
 values 
