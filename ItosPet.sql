@@ -2,21 +2,29 @@ create database itospet;
 
 use itospet;
 
-create table TIPOCLIENTE(
-    IDTIPOCLIENTE int not null auto_increment,
-    NOMETIPOCLIENTE varchar(45) not null,
-    primary key(IDTIPOCLIENTE)
-);
 
+create table PESSOA(
+CPF int not null auto_increment,
+NOME varchar(45) not null,
+SOBRENOME varchar(45) not null,
+primary key(CPF),
+index NOMECOMPLETO (NOME, SOBRENOME));
 
 create table CLIENTE(
 IDCLIENTE int not null auto_increment,
-FKIDTIPOCLIENTE int not null,
-NOMECLIENTE varchar(45) not null,
-SOBRENOME varchar(45) not null,
+PESSOACPF int not null,
+APELIDO varchar(45) not null,
 primary key(IDCLIENTE),
-foreign key(FKIDTIPOCLIENTE) references TIPOCLIENTE(IDTIPOCLIENTE),
-index NOMECOMPLETO (NOMECLIENTE, SOBRENOME));
+foreign key(PESSOACPF) references PESSOA(CPF));
+
+create table VENDEDOR(
+IDVENDEDOR int not null auto_increment,
+PESSOACPF int not null,
+APELIDOVENDEDOR varchar(45) not null,
+primary key(IDVENDEDOR),
+foreign key(PESSOACPF) references PESSOA(CPF));
+
+
 
 
 
@@ -66,6 +74,13 @@ create table MEIO_PAGAMENTO(
 );
 
 
+create table ESTADO_VENDA(
+    IDESTADO_VENDA int not null auto_increment,
+    NOMEESTADO_VENDA varchar(45) not null,
+    primary key(IDESTADO_VENDA)
+);
+
+
 
 create table TIPOPRODUTO(
     IDTIPOPROD int NOT NULL auto_increment,
@@ -112,41 +127,40 @@ create table ITEMVENDA(
 
 
 insert into TIPOCLIENTE(NOMETIPOCLIENTE) VALUES ('Normal'),
-('VIP'),
-('Banana');
+('VIP');
 
 
 insert into CLIENTE(FKIDTIPOCLIENTE, NOMECLIENTE, SOBRENOME) 
 values 
-(1, 'John', 'Doe'),
+(1, 'Consumidor', 'Normal'),
 (1 ,'Jane', 'Smith'),
 (1, 'Michael', 'Johnson'),
 (2, 'Emily', 'Williams'),
-(3, 'William', 'Brown'),
+(2, 'William', 'Brown'),
 (2, 'Olivia', 'Jones'),
-(3, 'James', 'Miller'),
+(2, 'James', 'Miller'),
 (1, 'Sophia', 'Davis'),
 (1, 'Liam', 'Wilson'),
 (1, 'Emma', 'Taylor'),
 (1, 'Alexander', 'Anderson'),
 (2, 'Ava', 'Thomas'),
-(3, 'Ethan', 'Martinez'),
-(3, 'Isabella', 'Robinson'),
+(1, 'Ethan', 'Martinez'),
+(1, 'Isabella', 'Robinson'),
 
 (1, 'Doe', 'John'),
 (2, 'Smith', 'Jane'),
-(3, 'Johnson', 'Michael'),
+(2, 'Johnson', 'Michael'),
 (1, 'Williams', 'Emily'),
-(3, 'Brown', 'William'),
+(2, 'Brown', 'William'),
 (2, 'Jones', 'Olivia'),
-(3, 'Miller', 'James'),
-(3, 'Davis', 'Sophia'),
+(2, 'Miller', 'James'),
+(1, 'Davis', 'Sophia'),
 (2, 'Wilson', 'Liam'),
 (1, 'Taylor', 'Emma'),
 (1, 'Anderson', 'Alexander'),
 (2, 'Thomas', 'Ava'),
-(3, 'Martinez', 'Ethan'),
-(3, 'Robinson', 'Isabelle');
+(1, 'Martinez', 'Ethan'),
+(2, 'Robinson', 'Isabelle');
 
 
 
