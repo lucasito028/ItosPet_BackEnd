@@ -4,17 +4,23 @@ use itospet;
 
 
 create table TIPOPESSOA(
-    IDTIPOPESSOA int not null auto_increment
-    NOMETIPOPESSOA varchar(45) not null
+    IDTIPOPESSOA int not null auto_increment,
+
+    NOMETIPOPESSOA varchar(45) not null,
+    
+    primary key(IDTIPOPESSOA)
 );
 
 create table PESSOA(
 CPF int not null auto_increment,
+FKIDTIPOPESSOA int not null,
 
 NOME varchar(45) not null,
 SOBRENOME varchar(45) not null,
 
 primary key(CPF),
+foreign key(FKIDTIPOPESSOA) references TIPOPESSOA(IDTIPOPESSOA),
+
 index NOMECOMPLETO (NOME, SOBRENOME)
 );
 
@@ -43,14 +49,14 @@ foreign key(TIPO_ID) references TIPO(IDTIPO)
 
 create table PET(
 IDPET int not null auto_increment,
-CLIENTE_ID int not null,
+CPFPESSOA int not null,
 RACA_ID int not null,
 
 APELIDO varchar(45) not null,
 IDADE INT not null,
 
 primary key(IDPET),
-foreign key(CLIENTE_ID) references CLIENTE(IDCLIENTE),
+foreign key(CPFPESSOA) references PESSOA(CPF),
 foreign key(RACA_ID) references RACA(IDRACA)
 );
 
@@ -143,11 +149,11 @@ insert into TIPOPESSOA(NOMETIPOPESSOA) values ("Cliente"),
 
 
 
-insert into create table PESSOA(NOME, SOBRENOME) values ("Pedlo", "Pogo"),
-("Foo", "Kao"),
-("Jao", "Paulo"),
-("Coelho", "PEgador"),
-("Abril", "Inhegas");
+insert into PESSOA(FKIDTIPOPESSOA, NOME, SOBRENOME) values (1, "Pedlo", "Pogo"),
+(1, "Foo", "Kao"),
+(1, "Jao", "Paulo"),
+(1, "Coelho", "PEgador"),
+(2, "Abril", "Inhegas");
 
 
 
@@ -157,7 +163,7 @@ insert into TIPO (NOMETIPO) values
 ('Peixe');
 
 
-insert into RACA (NOMERACA, TIPO_ID) values 
+insert into RACA (TIPO_ID, NOMERACA) values 
 (1, 'Labrador'),
 (1, 'Poodle'),
 (1, 'Bulldog'),
