@@ -2,24 +2,24 @@
 
 include("DatabaseConnect.php");
 
-class Cliente extends DatabaseConnect{
+final class Cliente extends DatabaseConnect{
     
     protected $connectar;
-
-    protected array $formdt;
     
-
+    
     public function create($dadosclientesarray){
 
         try{
             
-        $this->connectar = $this-> connect();
+        $this -> connectar = $this -> connect();
 
-            if($this->connectar){
-                $stmt = $this->connectar->prepare(
+            if($this -> connectar){
+                
+                $stmt = $this -> connectar -> prepare(
                 "insert into CLIENTE
                 (FKIDTIPOCLIENTE, NOMECLIENTE, SOBRENOME) 
-                values (?, ?, ?)");
+                values (?, ?, ?)"
+                );
 
                 $stmt->execute(
                 [ 
@@ -27,10 +27,17 @@ class Cliente extends DatabaseConnect{
                 $dadosclientesarray["NMCLIENTE"], 
                 $dadosclientesarray["SBCLIENTE"] 
                 ]);
+
+                return "deucerto";
+
             }
+
+            return "paunahoradeconectar";
+
         }
 
         catch(PDOException $err){
+            return "Cagou {$err}";
 
         }
 
