@@ -3,6 +3,11 @@ create database itospet;
 use itospet;
 
 
+create table TIPOPESSOA(
+    IDTIPOPESSOA int not null auto_increment
+    NOMETIPOPESSOA varchar(45) not null
+);
+
 create table PESSOA(
 CPF int not null auto_increment,
 
@@ -12,29 +17,6 @@ SOBRENOME varchar(45) not null,
 primary key(CPF),
 index NOMECOMPLETO (NOME, SOBRENOME)
 );
-
-
-create table CLIENTE(
-IDCLIENTE int not null auto_increment,
-PESSOACPF int not null,
-
-APELIDO varchar(45) not null,
-
-primary key(IDCLIENTE),
-foreign key(PESSOACPF) references PESSOA(CPF)
-);
-
-
-create table VENDEDOR(
-IDVENDEDOR int not null auto_increment,
-PESSOACPF int not null,
-
-APELIDOVENDEDOR varchar(45) not null,
-
-primary key(IDVENDEDOR),
-foreign key(PESSOACPF) references PESSOA(CPF)
-);
-
 
 
 
@@ -155,6 +137,8 @@ create table ITEMVENDA(
 
 
 
+
+insert into 
 
 insert into TIPO (NOMETIPO) values 
 ('Cachorro'),
