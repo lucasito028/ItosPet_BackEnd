@@ -21,23 +21,29 @@ final class Cliente extends DatabaseConnect{
                 values (?, ?, ?)"
                 );
 
-                $stmt->execute(
+                $result = $stmt->execute(
                 [ 
                 $dadosclientesarray["FK_CLIENTE"], 
                 $dadosclientesarray["NMCLIENTE"], 
                 $dadosclientesarray["SBCLIENTE"] 
                 ]);
 
-                return "deucerto";
+                if($result){
+                    return "success";
+                }else{
+                    return "fail";
+                }
 
+
+            }else{
+                return "paunahoradeconectar";
             }
 
-            return "paunahoradeconectar";
 
         }
 
         catch(PDOException $err){
-            return "Cagou {$err}";
+            return "Cagou{$err}";
 
         }
 

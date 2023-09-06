@@ -44,6 +44,7 @@ abstract class DatabaseConnect{
          
             error_log("Connection error: " . $err->getMessage());
             return null;
+            
         }
 
     }
