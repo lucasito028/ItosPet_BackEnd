@@ -138,7 +138,18 @@ create table ITEMVENDA(
 
 
 
-insert into 
+insert into TIPOPESSOA(NOMETIPOPESSOA) values ("Cliente"),
+("Vendedor");
+
+
+
+insert into create table PESSOA(NOME, SOBRENOME) values ("Pedlo", "Pogo"),
+("Foo", "Kao"),
+("Jao", "Paulo"),
+("Coelho", "PEgador"),
+("Abril", "Inhegas");
+
+
 
 insert into TIPO (NOMETIPO) values 
 ('Cachorro'),
