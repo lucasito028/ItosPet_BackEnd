@@ -1,21 +1,22 @@
 <?php
 
+namespace DbConnect;
+
+use PDO, PDOException;
+
 abstract class DatabaseConnect{
     
     // Se o senhor quiser alterar depois para cada configuração
 
-    protected $host = "Toshis";
-
+    protected $host = "127.0.0.1";
     protected $user = "root";
-
+    
     //Mudar se Pedir
     protected $pass = "";
-
     protected $port = 3007;
-
     protected $db = "itospet";
+    protected object $conn;
 
-    protected $conn = null;
 
     public function connect(): ?PDO {
 
