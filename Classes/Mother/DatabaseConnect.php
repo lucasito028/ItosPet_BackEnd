@@ -6,51 +6,34 @@ use PDO, PDOException;
 
 abstract class DatabaseConnect{
     
-    // Se o senhor quiser alterar depois para cada configuração
+        protected $host = "127.0.0.1";
+        protected $user = "root";
+        protected $pass = "";
+        protected $dbname = "itospet";
+        protected $port = 3307;
 
-    protected $host = "127.0.0.1";
-    protected $user = "root";
-    
-    //Mudar se Pedir
-    protected $pass = "";
-    protected $port = 3007;
-    protected $db = "itospet";
-    protected object $conn;
+        protected object $connect;
 
+        public function connect(): ?PDO{
+            try{
 
-    public function connect(): ?PDO {
+                $dns = "mysql:host={$this->host};port={$this->port}
+                ;dbname={$this->dbname}";
 
-        try {
+                $this->connect = new PDO($dns, $this->user, $this->pass);
 
-            $dns = 
-            "mysql:host={$this->host};
-            port={$this->port};
-            dbname={$this->db}";
+                return $this->connect;
+                
+            }catch(PDOException $err){
 
-            $options = [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-            ];
+                die("Morri");
+                return false;
 
-            $this->conn = new PDO(
-                $dns,
-                $this->user,
-                $this->pass,
-                $options
-            );
+            }
 
-            return $this->conn;
-            
-        } catch(PDOException $err) {
-         
-            error_log("Connection error: " . $err->getMessage());
-            return null;
-            
         }
 
-    }
     
     
 }
-
 
