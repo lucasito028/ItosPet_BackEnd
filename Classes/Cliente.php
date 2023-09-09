@@ -41,6 +41,7 @@ final class Cliente extends DatabaseConnect{
         }
     }
     
+    
     public function create($dadosclientesarray){
 
         try{
@@ -103,9 +104,9 @@ final class Cliente extends DatabaseConnect{
 
                 $result = $stmt->execute(
                 [ 
-                $dadosclientesarray["CPFCLIENTE"], 
                 $dadosclientesarray["NMCLIENTE"], 
-                $dadosclientesarray["SBCLIENTE"] 
+                $dadosclientesarray["SBCLIENTE"],
+                $dadosclientesarray["CPFCLIENTE"] 
                 ]);
 
                 if($result){
