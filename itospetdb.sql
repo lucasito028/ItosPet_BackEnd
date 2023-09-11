@@ -106,6 +106,7 @@ create table PRODUTO(
 
     NOMEPRODUTO varchar(45) not null,
     PRECO double not null,
+    QTD int not null, 
 
     primary key(IDPRODUTO),
     foreign key (FK_IDTIPOPROD) references TIPOPRODUTO(IDTIPOPROD)
@@ -135,7 +136,8 @@ create table PETVENDA(
 -- Também é
 create table ITEMVENDA(
     PRODUTO_IDPRODUTO int not null,
-    FK_IDVENDA int not null, 
+    FK_IDVENDA int not null,
+    QTD_ITEM int not null, 
 
     foreign key(PRODUTO_IDPRODUTO) references PET(IDPET),
     foreign key(FK_IDVENDA) references VENDA(IDVENDA)
@@ -168,14 +170,17 @@ insert into RACA (TIPO_ID, NOMERACA) values
 (1, 'Poodle'),
 (1, 'Bulldog'),
 (1, 'Vira Lata'),
+(1, 'Pasto Alemões'),
+(1, 'Golden Retriever'),
 
 (2, 'Mial'),
 (2, 'Abyssinian'),
 (2, 'Aegean'),
 (2, 'Arabian Mau'),
 
-(3, 'Carpa'),
-(3, 'Tako');
+(3, 'Kanpachi'),
+(3, 'Sake'),
+(3, 'Maguro');
 
 
 insert into MEIO_VENDA (NOMEMEIO_VENDA) values 
