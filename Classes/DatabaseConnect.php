@@ -15,7 +15,9 @@ abstract class DatabaseConnect{
         protected object $connect;
 
         public function connect(): ?PDO{
+
             try{
+                
                 $dns = "mysql:host={$this->host};
                 port={$this->port}
                 ;dbname={$this->dbname}";
@@ -26,7 +28,7 @@ abstract class DatabaseConnect{
                 
             }catch(PDOException $err){
 
-                die("Morri ". $err->getMessage());
+                error_log("Morri ". $err->getMessage());
                 return false;
 
             }
