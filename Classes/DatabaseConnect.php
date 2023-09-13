@@ -29,7 +29,7 @@ abstract class DatabaseConnect{
             }catch(PDOException $err){
 
                 error_log("Morri ". $err->getMessage());
-                return false;
+                return null;
 
             }
 
