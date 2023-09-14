@@ -6,6 +6,7 @@ require_once 'DatabaseConnect.php';
 
 use PDO, PDOException, DbConnect\DatabaseConnect;
 
+
 class TipoCliente extends DatabaseConnect{
    
     protected object $conn;
@@ -66,7 +67,9 @@ class TipoCliente extends DatabaseConnect{
             }
         }
         catch(PDOException $err){
-
+            
+            error_log("Pau:{$err->getMessage()}");
+            return null;
         }
     }
 

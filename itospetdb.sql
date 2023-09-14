@@ -1,3 +1,5 @@
+drop database itospet;
+
 create database itospet;
 
 use itospet;
@@ -10,6 +12,7 @@ create table TIPOPESSOA(
     
     primary key(IDTIPOPESSOA)
 );
+
 
 create table PESSOA(
 CPF int not null auto_increment,
@@ -26,7 +29,8 @@ index NOMECOMPLETO (NOME, SOBRENOME)
 
 
 
-create table TIPO(
+
+create table TIPOANIMAL(
 IDTIPO int not null auto_increment,
 
 NOMETIPO varchar(45) not null,
@@ -42,7 +46,7 @@ TIPO_ID int not null,
 NOMERACA varchar(45) not null,
 
 primary key(IDRACA),
-foreign key(TIPO_ID) references TIPO(IDTIPO)
+foreign key(TIPO_ID) references TIPOANIMAL(IDTIPO)
 );
 
 
@@ -54,11 +58,13 @@ RACA_ID int not null,
 
 APELIDO varchar(45) not null,
 IDADE INT not null,
+DATANASC DATE NOT NULL,
 
 primary key(IDPET),
 foreign key(CPFPESSOA) references PESSOA(CPF),
 foreign key(RACA_ID) references RACA(IDRACA)
 );
+
 
 
 
@@ -91,6 +97,15 @@ create table ESTADO_VENDA(
 
 
 
+CREATE TABLE ESTADOPRODUTO(
+    IDESTADOPRODUTO int NOT NULL auto_increment,
+
+    NOMESTADOPRODUTO varchar(45) not null,
+
+    primary key(IDESTADOPRODUTO)
+    );
+
+
 create table TIPOPRODUTO(
     IDTIPOPROD int NOT NULL auto_increment,
 
@@ -103,24 +118,39 @@ create table TIPOPRODUTO(
 create table PRODUTO(
     IDPRODUTO int not null auto_increment,
     FK_IDTIPOPROD int not null,
+    FKESTADOPRODUTO int not null,
+    FKMEIO_VENDA int not null,
 
     NOMEPRODUTO varchar(45) not null,
     PRECO double not null,
     QTD int not null, 
 
     primary key(IDPRODUTO),
-    foreign key (FK_IDTIPOPROD) references TIPOPRODUTO(IDTIPOPROD)
+    foreign key (FK_IDTIPOPROD) references TIPOPRODUTO(IDTIPOPROD),
+    foreign key (FKESTADOPRODUTO) references ESTADOPRODUTO(IDESTADOPRODUTO),
+    foreign key (FKMEIO_VENDA) references MEIO_VENDA(IDMEIO_VENDA)
 );
+
 
 
 
 create table VENDA(
     IDVENDA int not null auto_increment,
+    FKMEIOVENDA int not null,
+    FKMEIO_PAGAMENTO int not null,
+    FKESTADO_VENDA int not null,
+    FKCPF int not null,
 
     PRECOTOTAL double not null,
+    DTVENDA date not null,
 
-    primary key(IDVENDA)
+    primary key(IDVENDA),
+    foreign key (FKMEIOVENDA) references MEIO_VENDA(IDMEIO_VENDA),
+    foreign key (FKMEIO_PAGAMENTO) references MEIO_PAGAMENTO(IDMEIO_PAGAMENTO),
+    foreign key (FKESTADO_VENDA) references ESTADO_VENDA(IDESTADO_VENDA),
+    foreign key (FKCPF) references PESSOA(CPF)
 );
+
 
 
 -- Isso é uma conecao de uma chave a outra
@@ -159,7 +189,7 @@ insert into PESSOA(FKIDTIPOPESSOA, NOME, SOBRENOME) values (1, "Pedlo", "Pogo"),
 
 
 
-insert into TIPO (NOMETIPO) values 
+insert into TIPOANIMAL (NOMETIPO) values 
 ('Cachorro'),
 ('Gato'),
 ('Peixe');
