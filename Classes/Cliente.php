@@ -6,9 +6,11 @@ require_once 'DatabaseConnect.php';
 
 use DbConnect\DatabaseConnect, PDO, PDOException;
 
-final class Cliente extends DatabaseConnect{
+
+class Cliente extends DatabaseConnect{
     
     protected object $conn;
+    
     
     public function select(){
 
@@ -64,11 +66,11 @@ final class Cliente extends DatabaseConnect{
 
                 if($result){
 
-                    return "success";
+                    return true;
 
                 }else{
 
-                    return "fail";
+                    return false;
 
                 }
 
@@ -111,11 +113,11 @@ final class Cliente extends DatabaseConnect{
 
                 if($result){
                     
-                    return "success";
+                    return true;
 
                 }else{
 
-                    return "fail";
+                    return false;
 
                 }
 
@@ -156,11 +158,11 @@ final class Cliente extends DatabaseConnect{
 
                 if($result){
                     
-                    return "success";
+                    return true;
 
                 }else{
 
-                    return "fail";
+                    return false;
 
                 }
 
