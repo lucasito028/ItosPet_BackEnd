@@ -7,13 +7,18 @@ require_once ('config.php');
 use PDO, PDOException;
 
 
-abstract class DatabaseConnect{
+abstract class DbConnect{
     
         protected $host = HOST;
+
         protected $user = USER;
+
         protected $port = PORT;
+
         protected $dbname = DB;
+
         protected $pass = PASS;
+        
 
 
         protected object $connect;
