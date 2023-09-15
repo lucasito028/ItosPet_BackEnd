@@ -7,13 +7,14 @@ require_once ('config.php');
 use PDO, PDOException;
 
 
-class DatabaseConnect{
+abstract class DatabaseConnect{
     
         protected $host = HOST;
         protected $user = USER;
-        protected $pass = PASS;
-        protected $dbname = DB;
         protected $port = PORT;
+        protected $dbname = DB;
+        protected $pass = PASS;
+
 
         protected object $connect;
 
@@ -43,12 +44,5 @@ class DatabaseConnect{
     
 }
 
-$b1 = new DatabaseConnect();
 
-if($b1->connect() != null){
-    echo "certo";
-
-}else{
-    echo "Pau";
-}
 

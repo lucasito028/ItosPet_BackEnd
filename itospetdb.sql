@@ -1,4 +1,4 @@
-drop database itospet;
+
 
 create database itospet;
 
@@ -22,7 +22,7 @@ create table PESSOA(
     SOBRENOME varchar(45) not null,
 
     primary key(CPF),
-    foreign key(FKIDTIPOPESSOA) references TIPOPESSOA(IDTIPOPESSOA),
+    foreign key(FKTPESSOA) references TIPOPESSOA(IDTIPOPESSOA),
 
     index NOMECOMPLETO (NOME, SOBRENOME)
 );
@@ -192,7 +192,7 @@ insert into TIPOPESSOA(NOMETIPOPESSOA) values ("Cliente"),
 insert into PESSOA(FKTPESSOA, NOME, SOBRENOME) values (1, "Pedlo", "Pogo"),
     (1, "Foo", "Kao"),
     (1, "Jao", "Paulo"),
-    (1, "Coelho", "PEgador"),
+    (1, "Coelho", "Pegador"),
     (2, "Abril", "Inhegas");
 
 
@@ -200,6 +200,7 @@ insert into PESSOA(FKTPESSOA, NOME, SOBRENOME) values (1, "Pedlo", "Pogo"),
 insert into TIPOANIMAL (NOMETIPO) values 
     ('Cachorro'),
     ('Gato'),
+    ('Ornitorrinco'),
     ('Peixe');
 
 
@@ -242,6 +243,7 @@ insert into MEIOPAGAMENTO (NMEIOPGT, PARCELA) values
 insert into ESTADOVENDA(NOMESTADOVENDA) values 
     ("Finalizado"),
     ("Cancelado"),
+    ("Em andamento")
     ("Pendente");
 
 
