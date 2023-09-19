@@ -1,5 +1,3 @@
-
-
 create database itospet;
 
 use itospet;
@@ -20,11 +18,30 @@ create table PESSOA(
 
     NOME varchar(45) not null,
     SOBRENOME varchar(45) not null,
+    DTNASC date not null,
 
     primary key(CPF),
     foreign key(FKTPESSOA) references TIPOPESSOA(IDTIPOPESSOA),
 
     index NOMECOMPLETO (NOME, SOBRENOME)
+);
+
+
+create table ENDERECO(
+    IDENDERECO int not null auto_increment,
+    FKPESSOA int not null,
+
+    CEP INT not null,
+    RUA varchar(45) not null,
+    N INT NOT NULL,
+    BAIRRO varchar(45) not null,
+    CIDAADE varchar(45) not null,
+    ESTAO varchar(45) not null,
+    OBS varchar(45) ,
+    
+
+    primary key(IDENDERECO),
+    foreign key(FKPESSOA) references PESSOA(CPF)
 );
 
 
@@ -116,9 +133,28 @@ create table TIPOPRODUTO(
 );
 
 
+create table FABRICANTE(
+    IDFABRICANTE int not null auto_increment,
+
+    NMFABRICANTE varchar(45) not null,
+
+    primary key(IDESTADOPRODUTO)
+);
+
+
+create table CATEGORIA(
+    IDCATEGORIA int not null auto_increment,
+    FKTPANIMAL int not null,
+
+    NMCATEGORIA varchar(45) not null,
+
+    primary key(IDCATEGORIA),
+    foreign key(FKTPANIMAL) references TIPOANIMAL(IDTIPO)
+);
+
+
 create table PRODUTO(
     IDPRODUTO int not null auto_increment,
-    FKESTADOPRODUTO int not null,
     FKTIPOPRODUTO int not null,
 
     NOMEPRODUTO varchar(45) not null,
@@ -126,8 +162,7 @@ create table PRODUTO(
     QTD int not null, 
 
     primary key(IDPRODUTO),
-    foreign key (FKTIPOPRODUTO) references TIPOPRODUTO(IDESTADOPRODUTO),
-    foreign key (FKESTADOPRODUTO) references ESTADOPRODUTO(IDESTADOPRODUTO)
+    foreign key (FKTIPOPRODUTO) references TIPOPRODUTO(IDESTADOPRODUTO)
 );
 
 
@@ -138,7 +173,9 @@ create table VENDA(
     FKMEIOPG int not null,
     FKESTADOVENDA int not null,
     FKONDE int not null,
-    FKPESSOA int not null,
+    FKIDCLIENTE int not null,
+    FKIDVENDEDOR int not null,
+
 
     PRECOTOTAL double not null,
     DTVENDA date not null,
@@ -146,8 +183,7 @@ create table VENDA(
     primary key(IDVENDA),
     foreign key (FKMEIOPG) references MEIOPAGAMENTO(IDMEIOPAGAMENTO),
     foreign key (FKESTADOVENDA) references ESTADOVENDA(IDESTADOVENDA),
-    foreign key (FKONDE) references ONDE(IDONDE),
-    foreign key (FKPESSOA) references PESSOA(CPF)
+    foreign key (FKONDE) references ONDE(IDONDE)
 );
 
 
@@ -156,9 +192,11 @@ create table VENDA(
 create table LOCALPRODUTO(
     FKONDE int not null,
     FKPRODUTO int not null,
+    FKESTADO int not null,
 
     foreign key (FKONDE) references ONDE(IDONDE),
     foreign key (FKPRODUTO) references PRODUTO(IDPRODUTO),
+    foreign key (FKESTADO) references ESTADOPRODUTO(IDESTADOPRODUTO)
 );
 
 
@@ -183,71 +221,4 @@ create table ITEMVENDA(
 
 
 
-
-insert into TIPOPESSOA(NOMETIPOPESSOA) values ("Cliente"),
-    ("Vendedor");
-
-
-
-insert into PESSOA(FKTPESSOA, NOME, SOBRENOME) values (1, "Pedlo", "Pogo"),
-    (1, "Foo", "Kao"),
-    (1, "Jao", "Paulo"),
-    (1, "Coelho", "Pegador"),
-    (2, "Abril", "Inhegas");
-
-
-
-insert into TIPOANIMAL (NOMETIPO) values 
-    ('Cachorro'),
-    ('Gato'),
-    ('Ornitorrinco'),
-    ('Peixe');
-
-
-insert into RACA (FKTIPOANIMAL, NOMERACA) values 
-    (1, 'Labrador'),
-    (1, 'Poodle'),
-    (1, 'Bulldog'),
-    (1, 'Vira Lata'),
-    (1, 'Pasto Alemões'),
-    (1, 'Golden Retriever'),
-
-    (2, 'Mial'),
-    (2, 'Abyssinian'),
-    (2, 'Aegean'),
-    (2, 'Arabian Mau'),
-
-    (3, 'Kanpachi'),
-    (3, 'Sake'),
-    (3, 'Maguro');
-
-
-
-insert into ONDE (NOMEONDE) values 
-    ('Presencial'),
-    ('Ecommerce');
-
-
-insert into MEIOPAGAMENTO (NMEIOPGT, PARCELA) values
-    ('Dinheiro', 1),
-    ('PIX', 1),
-    ('Débito', 1),
-    ('Crédito à Vista', 1),
-    ('Parcelado 2X', 2),
-    ('Parcelado 3X', 3),
-    ('Parcelado 4X', 4),
-    ('Parcelado 5X', 5),
-    ('Parcelado 6X', 6);
-
-
-insert into ESTADOVENDA(NOMESTADOVENDA) values 
-    ("Finalizado"),
-    ("Cancelado"),
-    ("Em andamento")
-    ("Pendente");
-
-
-insert into TIPOPRODUTO(NMESTADOPROD) values 
-    ("Servico"),
-    ("Produto");
 

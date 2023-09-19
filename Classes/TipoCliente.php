@@ -2,12 +2,12 @@
 
 namespace tpcliente;
 
-require_once 'DatabaseConnect.php';
+require_once 'db/DatabaseConnect.php';
 
-use PDO, PDOException, DbConnect\DatabaseConnect;
+use PDO, PDOException, DbConnect\DbConnect;
 
 
-class TipoCliente extends DatabaseConnect{
+class TipoCliente extends DbConnect{
    
     protected object $conn;
 

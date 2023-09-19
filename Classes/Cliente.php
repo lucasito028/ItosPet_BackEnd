@@ -2,30 +2,89 @@
 
 namespace cliente;
 
-require_once 'DatabaseConnect.php';
+require_once 'db/DbConnect.php';
 
-use DbConnect\DatabaseConnect, PDO, PDOException;
+use DbConnect\DbConnect, PDO, PDOException;
 
 
-class Cliente extends DatabaseConnect{
+class Cliente extends DbConnect{
     
     protected object $conn;
     
     
-    public function select(){
+    public function select($op, $oque){
 
         try{
 
             $this->conn = $this->connect();
     
             if ($this->conn) {
-                $stmt = $this->conn->prepare(
-                    "select CPF, 
-                    concat(NOME, ' ', SOBRENOME) as `Nome Completo` from PESSOA 
-                    where FKIDTIPOPESSOA like 1 
-                    order by CPF asc 
-                    limit 25;"
-                );
+
+                switch($op){
+                    //Where Nome
+                    case 1:
+                        $stmt = $this->conn->prepare(
+                            "select CPF, 
+                            concat(NOME, ' ', SOBRENOME) as `Nome Completo` from PESSOA 
+                            where FKIDTIPOPESSOA like 1 
+                            order by CPF asc 
+                            limit 25;"
+                        );
+                        break;
+                    //Group By Nome
+                    case 2:
+                        $stmt = $this->conn->prepare(
+                            "select CPF, 
+                            concat(NOME, ' ', SOBRENOME) as `Nome Completo` from PESSOA 
+                            where FKIDTIPOPESSOA like 1 
+                            order by CPF asc 
+                            limit 25;"
+                        );
+                        break;
+                    //Order By Nome
+                    case 3:
+                        $stmt = $this->conn->prepare(
+                            "select CPF, 
+                            concat(NOME, ' ', SOBRENOME) as `Nome Completo` from PESSOA 
+                            where FKIDTIPOPESSOA like 1 
+                            order by CPF asc 
+                            limit 25;"
+                        );
+                        break;
+
+
+                        //Where ID
+                    case 4:
+                        $stmt = $this->conn->prepare(
+                            "select CPF, 
+                            concat(NOME, ' ', SOBRENOME) as `Nome Completo` from PESSOA 
+                            where FKIDTIPOPESSOA like 1 
+                            order by CPF asc 
+                            limit 25;"
+                        );
+                        break;
+                    //Group By ID
+                    case 5:
+                        $stmt = $this->conn->prepare(
+                            "select CPF, 
+                            concat(NOME, ' ', SOBRENOME) as `Nome Completo` from PESSOA 
+                            where FKIDTIPOPESSOA like 1 
+                            order by CPF asc 
+                            limit 25;"
+                        );
+                        break;
+                    //Order By ID
+                    case 6:
+                        $stmt = $this->conn->prepare(
+                            "select CPF, 
+                            concat(NOME, ' ', SOBRENOME) as `Nome Completo` from PESSOA 
+                            where FKIDTIPOPESSOA like 1 
+                            order by CPF asc 
+                            limit 25;"
+                        );
+                        break;
+                }
+                
     
                 if ($stmt->execute()) {
                     // Recupera todos os registros como um array associativo
